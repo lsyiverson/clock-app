@@ -12,4 +12,6 @@
     <color name="drawer_text_selected">#E5B730</color>
     <color name="drawer_text_default">#26A95D</color>
     
+    <color name="orange">#FF8C2F</color>
+    
 </resources>
