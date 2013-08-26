@@ -4,6 +4,7 @@ package com.alarmclock.shake.app.widget;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,12 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
 
     private ArrayList<ShakeAlarmClock> mShakeAlarmClocks;
 
+    private Typeface mRoboto_Light;
+
     public ShakeAlarmClockAdapter(Context context, ArrayList<ShakeAlarmClock> shakeAlarmClocks ){
         mContext = context;
         mShakeAlarmClocks = shakeAlarmClocks;
+        mRoboto_Light = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Light.ttf");
     }
 
     public int getOpenPosition() {
@@ -80,6 +84,7 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.alarmclock_item, null);
             holder.timeTv = (TextView)convertView.findViewById(R.id.time);
+            holder.timeTv.setTypeface(mRoboto_Light);
             holder.infoTv = (TextView)convertView.findViewById(R.id.info);
             holder.clickLayout = (LinearLayout)convertView.findViewById(R.id.click_layout);
             holder.moreLayout = (LinearLayout)convertView.findViewById(R.id.more_layout);
