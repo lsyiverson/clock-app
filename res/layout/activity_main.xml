@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hello_world" />
-    </RelativeLayout>
+    </RelativeLayout>
     -->
 
     <FrameLayout
@@ -29,8 +29,8 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:choiceMode="singleChoice"
         android:background="@color/drawer_text_default"
+        android:choiceMode="singleChoice"
         android:divider="@drawable/shape_line"
         android:dividerHeight="0.5dp" />
 

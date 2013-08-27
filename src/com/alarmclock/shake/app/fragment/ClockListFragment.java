@@ -35,7 +35,7 @@ public class ClockListFragment extends Fragment{
         mActivity = (ActionBarActivity)getActivity();
         ShakeAlarmClock shakeAlarmClock = new ShakeAlarmClock();
         shakeAlarmClock.setTime("12:00");
-        shakeAlarmClock.setInfo("test");
+        shakeAlarmClock.setName("test");
         mShakeAlarmClocks = new ArrayList<ShakeAlarmClock>();
         for (int i = 0; i < 10; i++) {
             mShakeAlarmClocks.add(shakeAlarmClock);

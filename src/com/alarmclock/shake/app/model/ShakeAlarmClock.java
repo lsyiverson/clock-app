@@ -4,7 +4,7 @@ public class ShakeAlarmClock {
 
     private String time;
 
-    private String info;
+    private String name;
 
     public String getTime() {
         return time;
@@ -14,12 +14,12 @@ public class ShakeAlarmClock {
         this.time = time;
     }
 
-    public String getInfo() {
-        return info;
+    public String getName() {
+        return name;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
