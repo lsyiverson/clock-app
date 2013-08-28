@@ -5,7 +5,6 @@ import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import android.widget.ToggleButton;
 
 import com.alarmclock.shake.app.R;
 import com.alarmclock.shake.app.model.ShakeAlarmClock;
+import com.alarmclock.shake.app.utils.Utils;
 
 public class ShakeAlarmClockAdapter extends BaseAdapter {
 
@@ -29,14 +29,11 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
 
     private ArrayList<ShakeAlarmClock> mShakeAlarmClocks;
 
-    private Typeface mRoboto_Light;
-
     private String[] date;
 
     public ShakeAlarmClockAdapter(Context context, ArrayList<ShakeAlarmClock> shakeAlarmClocks) {
         mContext = context;
         mShakeAlarmClocks = shakeAlarmClocks;
-        mRoboto_Light = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
         date = new DateFormatSymbols().getShortWeekdays();
     }
 
@@ -91,7 +88,7 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.alarmclock_item, null);
             holder.timeTv = (TextView)convertView.findViewById(R.id.time);
-            holder.timeTv.setTypeface(mRoboto_Light);
+            holder.timeTv.setTypeface(Utils.getRobotoLightTypeface(mContext));
             holder.nameTv = (TextView)convertView.findViewById(R.id.name);
             holder.infoTv = (TextView)convertView.findViewById(R.id.info);
             holder.clickLayout = (LinearLayout)convertView.findViewById(R.id.click_layout);

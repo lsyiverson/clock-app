@@ -10,4 +10,5 @@
     <string name="capital_on">on</string>
     <string name="capital_off">off</string>
     <string name="repeat">REPEAT</string>
+    <string name="shake_stop_alarm_tips">Shake the phone to stop alarm</string>
 </resources>
