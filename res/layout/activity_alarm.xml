@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:padding="@dimen/activity_vertical_margin"
     android:orientation="vertical" >
-    
-    <ProgressBar
-        android:id="@+id/progress"
+
+    <TextView
+        android:id="@+id/current_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:max="100"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
-        />
-    
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="12:00"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/text_xxxlarge" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/shake_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/shake_stop_alarm_tips"
+        android:textColor="@color/text_light_gray"
+        android:textSize="@dimen/text_large" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/shake_tips"
+        android:layout_below="@id/current_time"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <com.alarmclock.shake.app.widget.CircleProgressBar
+            android:id="@+id/circle_progressbar"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            android:text="fjkslhklg" />
+    </LinearLayout>
+
+</RelativeLayout>

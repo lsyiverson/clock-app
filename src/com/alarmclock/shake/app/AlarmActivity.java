@@ -7,17 +7,17 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.widget.ProgressBar;
 
 import com.alarmclock.shake.app.services.ShakeService;
 import com.alarmclock.shake.app.services.ShakeService.OnShakedListener;
 import com.alarmclock.shake.app.services.ShakeService.ShakeServiceBinder;
+import com.alarmclock.shake.app.widget.CircleProgressBar;
 
 public class AlarmActivity extends Activity {
 
     private static final String LOG_TAG = "AlarmActivity";
 
-    private ProgressBar mProgressBar;
+    private CircleProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,7 @@ public class AlarmActivity extends Activity {
     }
 
     private void setupView() {
-        mProgressBar = (ProgressBar)findViewById(R.id.progress);
-        mProgressBar.setIndeterminate(true);
+        mProgressBar = (CircleProgressBar)findViewById(R.id.circle_progressbar);
     }
 
     @Override
@@ -60,7 +59,9 @@ public class AlarmActivity extends Activity {
 
                 @Override
                 public void onShaked(int progress) {
-                    mProgressBar.setIndeterminate(false);
+                    if (progress >= 100) {
+                        progress = 100;
+                    }
                     mProgressBar.setProgress(progress);
                 }
             });
