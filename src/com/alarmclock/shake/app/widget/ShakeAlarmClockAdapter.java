@@ -4,8 +4,11 @@ package com.alarmclock.shake.app.widget;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.RingtoneManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,8 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
     private Typeface mRoboto_Light;
 
     private String[] date;
+
+    private int RESULTCODE_CHOOSE_RING=10;
 
     public ShakeAlarmClockAdapter(Context context, ArrayList<ShakeAlarmClock> shakeAlarmClocks) {
         mContext = context;
@@ -127,6 +132,8 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
             holder.tb[7].setText(date[7]);
             holder.tb[7].setTextOn(date[7]);
             holder.tb[7].setTextOff(date[7]);
+            holder.ringPathTv = (TextView)convertView.findViewById(R.id.ring_path);
+            holder.cbVibrate = (CheckBox)convertView.findViewById(R.id.cb_vibrate);
             convertView.setTag(holder);
         }
 
@@ -171,26 +178,50 @@ public class ShakeAlarmClockAdapter extends BaseAdapter {
                     }
                 }
             });
+
+            holder.nameTv.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
+
+            holder.ringPathTv.setText("fdsfdsfsd");
+            holder.ringPathTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
+                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, mContext.getString(R.string.set_ringtone));
+                    ((Activity)mContext).startActivityForResult(intent, RESULTCODE_CHOOSE_RING);
+                }
+            });
+
+            holder.cbVibrate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (holder.cbRepeat.isChecked()) {
+
+                    }else {
+
+                    }
+                }
+            });
+
         }
         return convertView;
     }
 
     static class ViewHolder {
-        TextView timeTv;
-
-        TextView infoTv;
-
-        TextView nameTv;
+        TextView timeTv, infoTv, nameTv, ringPathTv;
 
         Switch s;
 
-        LinearLayout clickLayout;
+        LinearLayout clickLayout, moreLayout, day_layout;
 
-        LinearLayout moreLayout;
-
-        LinearLayout day_layout;
-
-        CheckBox cbRepeat;
+        CheckBox cbRepeat, cbVibrate;
 
         ToggleButton[] tb = new ToggleButton[8];
     }

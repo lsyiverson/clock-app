@@ -71,76 +71,98 @@
                 <ToggleButton
                     android:id="@+id/tb_1"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
+
                 <ToggleButton
                     android:id="@+id/tb_2"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
+
                 <ToggleButton
                     android:id="@+id/tb_3"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
+
                 <ToggleButton
                     android:id="@+id/tb_4"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
+
                 <ToggleButton
                     android:id="@+id/tb_5"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
+
                 <ToggleButton
                     android:id="@+id/tb_6"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
+
                 <ToggleButton
                     android:id="@+id/tb_7"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="@dimen/item_icon_size"
                     android:layout_margin="@dimen/item_text_margin"
-                    android:textColor="@color/light_blue"
+                    android:layout_weight="1"
                     android:background="@drawable/toggle_selector"
+                    android:textColor="@color/light_blue"
                     android:textSize="@dimen/text_small" />
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/item_text_margin"
-                android:layout_marginRight="@dimen/item_text_margin"
-                android:text="@string/app_name"
-                android:textColor="@color/text_gray"
-                android:textSize="@dimen/text_medium" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">"
+
+                <TextView
+                    android:id="@+id/ring_path"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/item_text_margin"
+                    android:textColor="@color/light_blue"
+                    android:textSize="@dimen/text_medium" />
+
+                <CheckBox
+                    android:id="@+id/cb_vibrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/item_text_margin"
+                    android:text="@string/vibrate"
+                    android:textColor="@color/light_blue"
+                    android:textSize="@dimen/text_medium" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
