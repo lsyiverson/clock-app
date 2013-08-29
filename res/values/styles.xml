@@ -20,6 +20,10 @@
     <style name="Theme" parent="Theme.AppCompat.Light">
         <item name="switchStyle">@style/Switch</item>
     </style>
+    
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="Theme.AppCompat.Light">
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
     <style name="Switch">
         <item name="track">@drawable/switch_track_holo_dark</item>

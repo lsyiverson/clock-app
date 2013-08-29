@@ -1,7 +1,12 @@
 
 package com.alarmclock.shake.app;
 
+import java.util.Calendar;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -72,6 +77,21 @@ public class MainActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
+        AlarmManager am=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 33);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Intent intent=new Intent(this, AlarmActivity.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+        Intent alarmChanged = new Intent("android.intent.action.ALARM_CHANGED");
+        alarmChanged.putExtra("alarmSet", true);
+        sendBroadcast(alarmChanged);
     }
 
     private void setupView(){

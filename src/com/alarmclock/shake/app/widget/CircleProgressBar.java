@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.alarmclock.shake.app.R;
+import com.alarmclock.shake.app.utils.DensityUtil;
+import com.alarmclock.shake.app.utils.Utils;
 
 public class CircleProgressBar extends View {
     private Context mContext;
@@ -25,6 +27,21 @@ public class CircleProgressBar extends View {
         mContext = context;
         oval = new RectF();
         paint = new Paint();
+        progressStrokeWidth = DensityUtil.dip2px(context, 10);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int specModeWidth = MeasureSpec.getMode(widthMeasureSpec);
+        int specModeHeight = MeasureSpec.getMode(heightMeasureSpec);
+        int specSizeWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int specSizeHeight = MeasureSpec.getSize(heightMeasureSpec);
+        if (specModeHeight == MeasureSpec.AT_MOST && specModeWidth == MeasureSpec.AT_MOST) {
+            int min = Math.min(specSizeWidth, specSizeHeight);
+            specSizeWidth = min;
+            specSizeHeight = min;
+        }
+        setMeasuredDimension(specSizeWidth, specSizeHeight);
     }
 
     @Override
@@ -62,7 +79,7 @@ public class CircleProgressBar extends View {
         paint.setTextSize(textHeight);
         int textWidth = (int) paint.measureText(text, 0, text.length());
         paint.setStyle(Style.FILL);
-        //        paint.setTypeface(Utils.getRobotoLightTypeface(mContext));
+        paint.setTypeface(Utils.getRobotoLightTypeface(mContext));
         canvas.drawText(text, width / 2 - textWidth / 2, height / 2 +textHeight/2, paint);
 
     }
