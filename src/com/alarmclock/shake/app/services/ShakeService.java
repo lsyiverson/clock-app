@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.alarmclock.shake.app.utils.Utils;
+
 public class ShakeService extends Service implements SensorEventListener{
 
     private static final String LOG_TAG = "ShakeService";
@@ -52,6 +54,7 @@ public class ShakeService extends Service implements SensorEventListener{
     public boolean onUnbind(Intent intent) {
         unregisterSensorListener();
         stopAlarm();
+        Utils.removeAlarmIcon(this);
         return super.onUnbind(intent);
     }
 
