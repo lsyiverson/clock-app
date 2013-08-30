@@ -4,6 +4,7 @@ package com.alarmclock.shake.app.model;
 
 
 
+
 public class ShakeAlarmClock {
 
     private int id;
@@ -137,7 +138,7 @@ public class ShakeAlarmClock {
     public void setDayString(String dayString) {
         this.dayString = dayString;
         for (int i = 0; i < dayString.length(); i++) {
-            this.dayInt[i] = Integer.valueOf(dayString.charAt(i)).intValue();
+            this.dayInt[i] = Integer.valueOf(String.valueOf(dayString.charAt(i))).intValue();
             this.dayBoolean[i] = getBoolean(this.dayInt[i]);
         }
     }

@@ -88,8 +88,19 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                 holder.nameTv.setText(shakeAlarmClock.getName());
                 if (isOpenAtPosition(position)) {
                     holder.moreLayout.setVisibility(View.VISIBLE);
+                    holder.infoTv.setText("");
                 } else {
                     holder.moreLayout.setVisibility(View.GONE);
+                    String str = shakeAlarmClock.getName();
+                    if (shakeAlarmClock.isRepeat()) {
+                        str += ":";
+                        for (int i = 1; i < shakeAlarmClock.getDayInt().length; i++) {
+                            if (shakeAlarmClock.getDayInt()[i]==1) {
+                                str += (date[i]+" ");
+                            }
+                        }
+                    }
+                    holder.infoTv.setText(str);
                 }
 
                 holder.cbRepeat.setChecked(shakeAlarmClock.isRepeat());
@@ -109,7 +120,8 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                 holder.s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                        shakeAlarmClock.setOpen(isChecked);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
 
@@ -122,7 +134,7 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                             holder.day_layout.setVisibility(View.GONE);
                         }
                         shakeAlarmClock.setRepeat(isChecked);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
 
@@ -133,49 +145,49 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 1);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
                 holder.tb[2].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 2);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
                 holder.tb[3].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 3);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
                 holder.tb[4].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 4);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
                 holder.tb[5].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 5);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
                 holder.tb[6].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 6);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
                 holder.tb[7].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         shakeAlarmClock.setDayBoolean(isChecked, 7);
-                        mDao.updateClock(shakeAlarmClock, false);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
 
@@ -201,11 +213,8 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                 holder.cbVibrate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (holder.cbVibrate.isChecked()) {
-
-                        }else {
-
-                        }
+                        shakeAlarmClock.setVibrate(isChecked);
+                        mDao.updateClock(shakeAlarmClock, true);
                     }
                 });
             }

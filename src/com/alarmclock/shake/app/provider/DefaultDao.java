@@ -12,7 +12,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.CursorLoader;
-import android.util.Log;
 
 import com.alarmclock.shake.app.model.ShakeAlarmClock;
 
@@ -53,10 +52,8 @@ public class DefaultDao {
         try {
             ContentValues values = new ContentValues();
             values = getContentClockValues(shakeAlarmClock);
-            Log.i("JT", "id = "+shakeAlarmClock.getId());
             String selection = ClockData.ClocksColumns._ID + "=" + "\'" + shakeAlarmClock.getId() + "\'";
             int row = mContentResolver.update(ClockData.Clocks.CONTENT_URI, values, selection, null);
-            Log.i("JT", "row = "+row);
             if (notifyChange) {
                 mContentResolver.notifyChange(ClockData.Clocks.CONTENT_URI, null);
             }

@@ -180,7 +180,7 @@
                 android:layout_marginLeft="@dimen/item_text_margin"
                 android:layout_marginRight="@dimen/item_text_margin"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_medium" />
+                android:textSize="@dimen/text_small" />
         </LinearLayout>
     </LinearLayout>
 
