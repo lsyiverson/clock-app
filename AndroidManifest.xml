@@ -8,6 +8,9 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,17 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.alarmclock.shake.app.AlarmActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-        
-        <service
-            android:name="com.alarmclock.shake.app.services.ShakeService" >
-            
+
+        <service android:name="com.alarmclock.shake.app.services.ShakeService" >
         </service>
+
+        <provider
+            android:name="com.alarmclock.shake.app.provider.ClockProvider"
+            android:authorities="com.alarmclock.shake.app.provider"
+            android:grantUriPermissions="true"
+            android:multiprocess="false" />
     </application>
 
 </manifest>

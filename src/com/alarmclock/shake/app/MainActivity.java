@@ -34,6 +34,10 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private ActionBar mActionBar;
+    private final int INVALID_POSITION = -1;
+    private final int CLOCK_LIST_POSITION = 0;
+    private int mPostion = 0;
+    private int mPostionTemp = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,25 +50,25 @@ public class MainActivity extends ActionBarActivity {
         setupView();
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
+                this,
+                mDrawerLayout,
+                R.drawable.ic_drawer,
+                R.string.drawer_open,
+                R.string.drawer_close
                 ) {
             @Override
             public void onDrawerClosed(View view) {
+                mPostion = mPostionTemp;
                 mActionBar.setTitle(mTitle);
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                supportInvalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
+                mPostion = INVALID_POSITION;
                 mActionBar.setTitle(mDrawerTitle);
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                supportInvalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -90,22 +94,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
+        mPostionTemp = position;
         Fragment fragment = null;
-
         FragmentManager fragmentManager = getSupportFragmentManager();
-        //        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         switch (position) {
             case 0:
                 fragment = new ClockListFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
-
             default:
                 break;
         }
-
-        // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
@@ -172,8 +171,18 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        switch (mPostion) {
+            case CLOCK_LIST_POSITION:
+                menu.add(0, 1, 0, getString(R.string.add_clock))
+                .setIcon(R.drawable.ic_action_alerts_and_states_add_alarm)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+                break;
+
+            default:
+                break;
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 

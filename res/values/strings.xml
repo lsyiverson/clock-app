@@ -13,5 +13,6 @@
     <string name="repeat">repeat</string>
     <string name="vibrate">vibrate</string>
     <string name="set_ringtone">Set Ringtone</string>
+    <string name="add_clock">new</string>
     <string name="shake_stop_alarm_tips">Shake the phone to stop alarm</string>
 </resources>
