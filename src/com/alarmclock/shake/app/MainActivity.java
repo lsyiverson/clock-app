@@ -7,6 +7,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -188,11 +189,11 @@ public class MainActivity extends ActionBarActivity {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         switch (mPostion) {
             case CLOCK_LIST_POSITION:
-                menu.add(0, 1, 0, getString(R.string.add_clock))
-                .setIcon(R.drawable.ic_action_alerts_and_states_add_alarm)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+                MenuItemCompat.setShowAsAction(menu.add(0, 1, 0, getString(R.string.add_clock))
+                        .setIcon(R.drawable.ic_action_alerts_and_states_add_alarm),
+                        MenuItemCompat.SHOW_AS_ACTION_IF_ROOM
+                        | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
                 break;
-
             default:
                 break;
         }
