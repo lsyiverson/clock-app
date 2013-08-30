@@ -1,5 +1,7 @@
 package com.alarmclock.shake.app.services;
 
+import java.io.IOException;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +9,14 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
+
+import com.alarmclock.shake.app.utils.Utils;
 
 public class ShakeService extends Service implements SensorEventListener{
 
@@ -21,6 +29,8 @@ public class ShakeService extends Service implements SensorEventListener{
     private IBinder mBinder = new ShakeServiceBinder();
 
     private OnShakedListener mShakedListener;
+
+    private MediaPlayer mMediaPlayer;
 
     public interface OnShakedListener {
         public void onShaked(int progress);
@@ -36,18 +46,50 @@ public class ShakeService extends Service implements SensorEventListener{
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 
         mAccelerometerSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        mMediaPlayer = new MediaPlayer();
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
         unregisterSensorListener();
+        stopAlarm();
+        Utils.removeAlarmIcon(this);
         return super.onUnbind(intent);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         registerSensorListener();
+        playAlarm();
         return mBinder;
+    }
+
+    private void playAlarm() {
+        Uri alertUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        try {
+            mMediaPlayer.setDataSource(this, alertUri);
+            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+            mMediaPlayer.prepare();
+            mMediaPlayer.start();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void stopAlarm() {
+        mMediaPlayer.stop();
+        mMediaPlayer.release();
     }
 
     private void registerSensorListener() {
@@ -70,7 +112,7 @@ public class ShakeService extends Service implements SensorEventListener{
 
     int count = 0;
     int n = 14;
-    int level = 1;
+    int level = 9;
     @Override
     public void onSensorChanged(SensorEvent event) {
         switch (event.sensor.getType()) {

@@ -1,9 +1,11 @@
+
 package com.alarmclock.shake.app.utils;
 
 import java.util.ArrayList;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -13,6 +15,8 @@ import android.util.Log;
 public class Utils {
 
     private static Typeface mRobotoLight;
+
+    private static final String ACTION_ALARM_CHANGED = "android.intent.action.ALARM_CHANGED";
 
     public static Typeface getRobotoLightTypeface(Context context) {
         if (mRobotoLight == null) {
@@ -29,8 +33,7 @@ public class Utils {
             if (cursor != null) {
 
                 if (cursor.moveToNext()) {
-                    uriString = cursor
-                            .getString(cursor.getColumnIndex("title"));
+                    uriString = cursor.getString(cursor.getColumnIndex("title"));
                 }
                 cursor.close();
             }
@@ -114,4 +117,15 @@ public class Utils {
         return builder.toString();
     }
 
+    public static void addAlarmIcon(Context context) {
+        Intent alarmChanged = new Intent(ACTION_ALARM_CHANGED);
+        alarmChanged.putExtra("alarmSet", true);
+        context.sendBroadcast(alarmChanged);
+    }
+
+    public static void removeAlarmIcon(Context context) {
+        Intent alarmChanged = new Intent(ACTION_ALARM_CHANGED);
+        alarmChanged.putExtra("alarmSet", false);
+        context.sendBroadcast(alarmChanged);
+    }
 }

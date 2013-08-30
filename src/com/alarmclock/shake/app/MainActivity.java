@@ -76,6 +76,19 @@ public class MainActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
+        //        AlarmManager am=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //        Calendar calendar=Calendar.getInstance();
+        //        calendar.setTimeInMillis(System.currentTimeMillis());
+        //        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        //        calendar.set(Calendar.MINUTE, 33);
+        //        calendar.set(Calendar.SECOND, 0);
+        //        calendar.set(Calendar.MILLISECOND, 0);
+        //        Intent intent=new Intent(this, AlarmActivity.class);
+        //        PendingIntent pendingIntent=PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        //
+        //        Utils.addAlarmIcon(this);
     }
 
     private void setupView(){
