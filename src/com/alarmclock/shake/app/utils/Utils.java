@@ -1,6 +1,7 @@
 
 package com.alarmclock.shake.app.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.ContentResolver;
@@ -17,6 +18,8 @@ public class Utils {
     private static Typeface mRobotoLight;
 
     private static final String ACTION_ALARM_CHANGED = "android.intent.action.ALARM_CHANGED";
+
+    public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm");
 
     public static Typeface getRobotoLightTypeface(Context context) {
         if (mRobotoLight == null) {

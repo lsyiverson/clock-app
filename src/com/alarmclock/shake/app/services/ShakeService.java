@@ -11,11 +11,13 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Vibrator;
 
+import com.alarmclock.shake.app.model.ShakeAlarmClock;
+import com.alarmclock.shake.app.utils.Constants;
 import com.alarmclock.shake.app.utils.Utils;
 
 public class ShakeService extends Service implements SensorEventListener{
@@ -26,11 +28,17 @@ public class ShakeService extends Service implements SensorEventListener{
 
     private Sensor mAccelerometerSensor;
 
+    private Vibrator mVibrator;
+
     private IBinder mBinder = new ShakeServiceBinder();
 
     private OnShakedListener mShakedListener;
 
     private MediaPlayer mMediaPlayer;
+
+    private ShakeAlarmClock mAlarm;
+
+    private static final long[] VIBRATE_PATTERN = new long[] { 1000, 800 };
 
     public interface OnShakedListener {
         public void onShaked(int progress);
@@ -47,6 +55,8 @@ public class ShakeService extends Service implements SensorEventListener{
 
         mAccelerometerSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         mMediaPlayer = new MediaPlayer();
     }
 
@@ -61,12 +71,13 @@ public class ShakeService extends Service implements SensorEventListener{
     @Override
     public IBinder onBind(Intent intent) {
         registerSensorListener();
+        mAlarm = (ShakeAlarmClock)intent.getSerializableExtra(Constants.ALARM_RAW_DATA);
         playAlarm();
         return mBinder;
     }
 
     private void playAlarm() {
-        Uri alertUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        Uri alertUri = Uri.parse(mAlarm.getRingUri());
         try {
             mMediaPlayer.setDataSource(this, alertUri);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
@@ -85,11 +96,18 @@ public class ShakeService extends Service implements SensorEventListener{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        if (null != mVibrator && mAlarm.isVibrate()) {
+            mVibrator.vibrate(VIBRATE_PATTERN, 0);
+        }
     }
 
     private void stopAlarm() {
         mMediaPlayer.stop();
         mMediaPlayer.release();
+        if (null != mVibrator && mAlarm.isVibrate()) {
+            mVibrator.cancel();
+        }
     }
 
     private void registerSensorListener() {

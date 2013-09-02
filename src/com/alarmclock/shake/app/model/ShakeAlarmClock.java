@@ -1,11 +1,18 @@
 
 package com.alarmclock.shake.app.model;
 
+import java.io.Serializable;
 
 
 
 
-public class ShakeAlarmClock {
+
+public class ShakeAlarmClock implements Serializable{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     private int id;
 
@@ -184,8 +191,5 @@ public class ShakeAlarmClock {
     private int getInt(boolean b) {
         return b ? 1 : 0;
     }
-
-
-
 
 }
