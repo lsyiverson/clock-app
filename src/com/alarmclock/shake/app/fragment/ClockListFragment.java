@@ -55,8 +55,8 @@ public class ClockListFragment extends Fragment{
         mDao = new DefaultDao(mActivity);
         mShakeAlarmClocks = mDao.getClocks();
         mLoaderCallback = new LoaderCallback();
-        mActivity.getSupportLoaderManager().initLoader(mLoderId, null, mLoaderCallback);
         mListView = (ListView)getView().findViewById(R.id.list);
+        mActivity.getSupportLoaderManager().initLoader(mLoderId, null, mLoaderCallback);
         mListView.setAdapter(mAdapter);
     }
 
