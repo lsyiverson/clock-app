@@ -75,6 +75,10 @@ public class ClockListFragment extends Fragment{
                     int position = mAdapter.getOpenPosition();
                     Uri pickedUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                     String title = Utils.getTitleByUri(mActivity, pickedUri);
+                    ShakeAlarmClock shakeAlarmClock = mAdapter.getItem(position);
+                    shakeAlarmClock.setRingName(title);
+                    shakeAlarmClock.setRingUri(String.valueOf(pickedUri));
+                    mDao.updateClock(shakeAlarmClock, true);
                 }
                 catch (Exception e)
                 {
@@ -91,7 +95,6 @@ public class ClockListFragment extends Fragment{
             case 1:
                 ShakeAlarmClock shakeAlarmClock = new ShakeAlarmClock();
                 shakeAlarmClock.setTime("8:30");
-                shakeAlarmClock.setName("test");
                 mDao.insertClock(shakeAlarmClock, true);
                 break;
 
