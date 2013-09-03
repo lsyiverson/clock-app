@@ -15,6 +15,9 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.alarmclock.shake.app.model.ShakeAlarmClock;
 import com.alarmclock.shake.app.utils.Constants;
@@ -33,6 +36,8 @@ public class ShakeService extends Service implements SensorEventListener{
     private IBinder mBinder = new ShakeServiceBinder();
 
     private OnShakedListener mShakedListener;
+
+    private TelephonyManager mTelephonyManager;
 
     private MediaPlayer mMediaPlayer;
 
@@ -56,6 +61,9 @@ public class ShakeService extends Service implements SensorEventListener{
         mAccelerometerSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        mTelephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephonyManager.listen(new TelphoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
         mMediaPlayer = new MediaPlayer();
     }
@@ -126,6 +134,31 @@ public class ShakeService extends Service implements SensorEventListener{
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // TODO Auto-generated method stub
 
+    }
+
+    private class TelphoneListener extends PhoneStateListener {
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            super.onCallStateChanged(state, incomingNumber);
+            switch (state) {
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                    Log.d(LOG_TAG, "offhook");
+                    mVibrator.cancel();
+                    break;
+                case TelephonyManager.CALL_STATE_IDLE:
+                    Log.d(LOG_TAG, "idle");
+                    mMediaPlayer.start();
+                    mVibrator.vibrate(VIBRATE_PATTERN, 0);
+                    break;
+                case TelephonyManager.CALL_STATE_RINGING:
+                    Log.d(LOG_TAG, "ringing");
+                    mMediaPlayer.pause();
+                    mVibrator.cancel();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     int count = 0;
