@@ -80,8 +80,8 @@ public class MainActivity extends ActionBarActivity {
 
         //        AlarmManager am=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
         //        Calendar calendar=Calendar.getInstance();
-        //        calendar.set(Calendar.HOUR_OF_DAY, 10);
-        //        calendar.set(Calendar.MINUTE, 49);
+        //        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        //        calendar.set(Calendar.MINUTE, 16);
         //
         //        Date date = calendar.getTime();
         //

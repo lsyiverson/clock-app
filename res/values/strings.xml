@@ -17,4 +17,5 @@
     <string name="alarm_lable">lable</string>
     <string name="ring_name">ring name</string>
     <string name="shake_stop_alarm_tips">Shake the phone to stop alarm</string>
+    <string name="alarm_silent">Silent</string>
 </resources>

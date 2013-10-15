@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
@@ -219,6 +220,8 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
 
                 if (!TextUtils.isEmpty(shakeAlarmClock.getRingName())) {
                     holder.ringNameTv.setText(shakeAlarmClock.getRingName());
+                } else {
+                    holder.ringNameTv.setText(mContext.getString(R.string.alarm_silent));
                 }
                 holder.ringNameTv.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -228,6 +231,8 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                                 RingtoneManager.TYPE_ALARM);
                         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
                                 mContext.getString(R.string.set_ringtone));
+                        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+                        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(shakeAlarmClock.getRingUri()));
                         mFragment.startActivityForResult(intent, Constants.RESULTCODE_CHOOSE_RING);
                     }
                 });
