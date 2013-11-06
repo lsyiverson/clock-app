@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.alarmclock.shake.app.widget.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
-    <LinearLayout
+    <com.alarmclock.shake.app.widget.CheckedLinearLayout
         android:layout_width="@dimen/item_height"
         android:layout_height="@dimen/item_height"
         android:background="@drawable/drawer_icon_selector"
@@ -17,14 +17,14 @@
             android:layout_width="@dimen/item_icon_size"
             android:layout_height="@dimen/item_icon_size"
             android:contentDescription="@string/pic" />
-    </LinearLayout>
+    </com.alarmclock.shake.app.widget.CheckedLinearLayout>
     
     <View 
         android:layout_width="0.5dp"
         android:layout_height="match_parent"
         android:background="@drawable/shape_line"/>
 
-    <LinearLayout
+    <com.alarmclock.shake.app.widget.CheckedLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/drawer_text_selector"
@@ -39,6 +39,6 @@
             android:layout_marginRight="@dimen/item_text_margin"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium" />
-    </LinearLayout>
+    </com.alarmclock.shake.app.widget.CheckedLinearLayout>
 
-</LinearLayout>
+</com.alarmclock.shake.app.widget.CheckedLinearLayout>
