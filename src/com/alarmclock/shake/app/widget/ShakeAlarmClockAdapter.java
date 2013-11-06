@@ -232,7 +232,13 @@ public class ShakeAlarmClockAdapter extends CursorAdapter {
                         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
                                 mContext.getString(R.string.set_ringtone));
                         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
-                        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(shakeAlarmClock.getRingUri()));
+                        Uri uri;
+                        if (TextUtils.isEmpty(shakeAlarmClock.getRingUri())) {
+                            uri = null;
+                        } else {
+                            uri = Uri.parse(shakeAlarmClock.getRingUri());
+                        }
+                        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, uri);
                         mFragment.startActivityForResult(intent, Constants.RESULTCODE_CHOOSE_RING);
                     }
                 });
