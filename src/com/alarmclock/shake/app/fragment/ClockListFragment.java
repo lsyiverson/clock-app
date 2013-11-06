@@ -95,6 +95,10 @@ public class ClockListFragment extends Fragment{
             case 1:
                 ShakeAlarmClock shakeAlarmClock = new ShakeAlarmClock();
                 shakeAlarmClock.setTime("8:30");
+                Uri defaultUri = RingtoneManager.getActualDefaultRingtoneUri(mActivity, RingtoneManager.TYPE_ALARM);
+                String title = Utils.getTitleByUri(mActivity, defaultUri);
+                shakeAlarmClock.setRingName(title);
+                shakeAlarmClock.setRingUri(String.valueOf(defaultUri));
                 mDao.insertClock(shakeAlarmClock, true);
                 break;
 
